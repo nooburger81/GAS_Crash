@@ -9,6 +9,7 @@
 struct FInputActionValue;
 class UInputMappingContext;
 class UInputAction;
+struct FGameplayTag;
 
 UCLASS()
 class GAS_CRASH_API AGASCC_PlayerController : public APlayerController
@@ -34,9 +35,21 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Crash|Input|Abilities")
 	TObjectPtr<UInputAction> PrimaryAction;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Crash|Input|Abilities")
+	TObjectPtr<UInputAction> SecondaryAction;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Crash|Input|Abilities")
+	TObjectPtr<UInputAction> TertiaryAction;
+
+	
+
 	void Jump();
 	void StopJumping();
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	void Primary();
+	void Secondary();
+	void Tertiary();
+	void ActivateAbility(const FGameplayTag& AbilityTag) const;
+	
 };

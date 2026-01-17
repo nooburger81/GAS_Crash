@@ -3,9 +3,13 @@
 
 
 #include "GAS_Crash/Public/Player/GASCC_PlayerController.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystemComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/Character.h"
+#include "GameplayTags/GASCCTags.h"
 
 void AGASCC_PlayerController::SetupInputComponent()
 {
@@ -28,6 +32,8 @@ void AGASCC_PlayerController::SetupInputComponent()
 			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AGASCC_PlayerController::Look);
 
 			EnhancedInputComponent->BindAction(PrimaryAction, ETriggerEvent::Started, this, &AGASCC_PlayerController::Primary);
+			EnhancedInputComponent->BindAction(SecondaryAction, ETriggerEvent::Started, this, &AGASCC_PlayerController::Secondary);
+			EnhancedInputComponent->BindAction(TertiaryAction, ETriggerEvent::Started, this, &AGASCC_PlayerController::Tertiary);
 		}
 	}
 }
@@ -69,5 +75,23 @@ void AGASCC_PlayerController::Look(const FInputActionValue& Value)
 
 void AGASCC_PlayerController::Primary()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Primary"));
+	ActivateAbility(GASCCTags::GASCCAbilities::Primary);
+}
+
+void AGASCC_PlayerController::Secondary()
+{
+	ActivateAbility(GASCCTags::GASCCAbilities::Secondary);
+}
+
+void AGASCC_PlayerController::Tertiary()
+{
+	ActivateAbility(GASCCTags::GASCCAbilities::Tertiary);
+}
+
+void AGASCC_PlayerController::ActivateAbility(const FGameplayTag& AbilityTag) const
+{
+	UAbilitySystemComponent* ASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn());
+	if (!IsValid(ASC)) return;
+
+	ASC->TryActivateAbilitiesByTag(AbilityTag.GetSingleTagContainer());
 }

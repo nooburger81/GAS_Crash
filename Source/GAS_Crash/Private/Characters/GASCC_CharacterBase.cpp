@@ -20,3 +20,15 @@ UAbilitySystemComponent* AGASCC_CharacterBase::GetAbilitySystemComponent() const
 {
 	return nullptr;
 }
+
+void AGASCC_CharacterBase::GiveStartupAbilities()
+{
+	if (!IsValid(GetAbilitySystemComponent())) return;
+	
+	for (const auto& Ability : StartupAbilities)
+	{
+		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Ability);
+		GetAbilitySystemComponent()->GiveAbility(AbilitySpec);
+	}	
+	
+}
