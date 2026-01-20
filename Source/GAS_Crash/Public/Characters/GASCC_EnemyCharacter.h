@@ -7,6 +7,7 @@
 #include "GASCC_EnemyCharacter.generated.h"
 
 class UAbilitySystemComponent;
+class UAttributeSet;
 
 UCLASS()
 class GAS_CRASH_API AGASCC_EnemyCharacter : public AGASCC_CharacterBase
@@ -26,5 +27,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
 
 };

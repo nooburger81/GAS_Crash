@@ -7,6 +7,7 @@
 #include "AbilitySystemInterface.h"
 #include "GASCC_PlayerState.generated.h"
 
+class UAttributeSet;
 class UAbilitySystemComponent;
 
 UCLASS()
@@ -22,4 +23,7 @@ class GAS_CRASH_API AGASCC_PlayerState : public APlayerState, public IAbilitySys
 
 		UPROPERTY(VisibleAnywhere, Category = "Crash|Abilities")
 		TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+		UPROPERTY()
+		TObjectPtr<UAttributeSet> AttributeSet;
 };

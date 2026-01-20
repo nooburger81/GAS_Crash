@@ -3,6 +3,7 @@
 
 #include "Characters/GASCC_EnemyCharacter.h"
 #include "AbilitySystem/GASCC_AbilitySystemComponent.h"
+#include "AbilitySystem/GASCC_AttributeSet.h"
 
 
 AGASCC_EnemyCharacter::AGASCC_EnemyCharacter()
@@ -13,6 +14,8 @@ AGASCC_EnemyCharacter::AGASCC_EnemyCharacter()
 	AbilitySystemComponent = CreateDefaultSubobject<UGASCC_AbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
+	AttributeSet = CreateDefaultSubobject<UGASCC_AttributeSet>("AttributeSet");
 }
 
 UAbilitySystemComponent* AGASCC_EnemyCharacter::GetAbilitySystemComponent() const
@@ -31,6 +34,7 @@ void AGASCC_EnemyCharacter::BeginPlay()
 	if (!HasAuthority()) return;
 
 	GiveStartupAbilities();
+	InitializeAttributes();
 }
 	
 

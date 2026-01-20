@@ -8,6 +8,7 @@
 #include "GASCC_CharacterBase.generated.h"
 
 class UGameplayAbility;
+class UGameplayEffect;
 
 UCLASS(Abstract)
 class GAS_CRASH_API AGASCC_CharacterBase : public ACharacter, public IAbilitySystemInterface
@@ -21,10 +22,15 @@ public:
 
 protected:
 	void GiveStartupAbilities();
+	void InitializeAttributes() const;
+	void InitializeAttributes();
 
 private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Crash|Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Crash|Effects")
+	TSubclassOf<UGameplayEffect> InitializeAttributesEffect;
 	
 };
