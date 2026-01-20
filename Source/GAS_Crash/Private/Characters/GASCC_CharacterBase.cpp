@@ -33,7 +33,7 @@ void AGASCC_CharacterBase::GiveStartupAbilities()
 	
 }
 
-void AGASCC_CharacterBase::InitializeAttributes() const
+void AGASCC_CharacterBase::InitializeAttributes()
 {
 	checkf(IsValid(InitializeAttributesEffect), TEXT("InitializeAttributesEffect is not set."));
 
