@@ -18,6 +18,7 @@ class GAS_CRASH_API AGASCC_PlayerState : public APlayerState, public IAbilitySys
 	public:
 		AGASCC_PlayerState();
 		virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+		UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 	private:
 

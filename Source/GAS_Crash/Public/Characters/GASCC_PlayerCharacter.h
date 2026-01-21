@@ -16,6 +16,7 @@ class GAS_CRASH_API AGASCC_PlayerCharacter : public AGASCC_CharacterBase
 public:
 		AGASCC_PlayerCharacter();
 		virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+		virtual UAttributeSet* GetAttributeSet() const override;
 		virtual void PossessedBy(AController* NewController) override;
 		virtual void OnRep_PlayerState() override;
 
