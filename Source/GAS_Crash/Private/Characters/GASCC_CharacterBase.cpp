@@ -5,6 +5,10 @@
 #include "AbilitySystemComponent.h"
 #include "Net/UnrealNetwork.h"
 
+namespace CrashTags
+{
+	const FName Player = FName("Player");
+}
 
 // Sets default values
 AGASCC_CharacterBase::AGASCC_CharacterBase()
@@ -62,13 +66,18 @@ void AGASCC_CharacterBase::OnHealthChanged(const FOnAttributeChangeData& Attribu
 void AGASCC_CharacterBase::HandleDeath()
 {
 	bAlive = false;
-
-	if (IsValid(GEngine))
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::Printf( TEXT("%s has died."), *GetName()));
-	}
+	
 }
 void AGASCC_CharacterBase::HandleRespawn()
 {
 	bAlive = true;
+}
+
+void AGASCC_CharacterBase::ResetAttributes()
+{
+	checkf(IsValid(ResetAttributesEffect), TEXT("ResetAttributesEffect is not set."));
+
+	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
+	FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(ResetAttributesEffect, 1.f, ContextHandle);
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 }

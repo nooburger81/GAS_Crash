@@ -2,6 +2,8 @@
 
 
 #include "Utils/GASCC_BlueprintFunctionLibrary.h"
+#include "Characters/GASCC_CharacterBase.h"
+#include "Kismet/GameplayStatics.h"
 
 EHitDirection UGASCC_BlueprintFunctionLibrary::GetHitDirection(const FVector& TargetForward, const FVector& ToInstigator)
 {
@@ -33,4 +35,33 @@ FName UGASCC_BlueprintFunctionLibrary::GetHitDirectionName(const EHitDirection& 
 		case EHitDirection::Front: return FName("Front");
 		default: return FName("None");
 	}
+}
+
+FClosestActorWithTagResult UGASCC_BlueprintFunctionLibrary::FindClosesActorWithTag(const UObject* WorldContextObject, const FVector& Origin, const FName& Tag)
+{
+	TArray<AActor*> ActorsWithTag;
+	UGameplayStatics::GetAllActorsWithTag(WorldContextObject, Tag, ActorsWithTag);
+	
+	float ClosestDistance = TNumericLimits<float>::Max();
+	AActor* ClosestActor = nullptr;
+
+	for (AActor* Actor : ActorsWithTag)
+	{
+		if (!IsValid(Actor)) continue;
+		AGASCC_CharacterBase* BaseCharacter = Cast<AGASCC_CharacterBase>(Actor);
+		if (!IsValid(BaseCharacter) || !BaseCharacter->IsAlive()) continue;
+
+		const float Distance = FVector::Dist(Origin, Actor->GetActorLocation());
+		if (Distance < ClosestDistance)
+		{
+			ClosestDistance = Distance;
+			ClosestActor = Actor;
+		}
+	}
+
+	FClosestActorWithTagResult Result;
+	Result.Actor = ClosestActor;
+	Result.Distance = ClosestDistance;
+	
+	return Result;
 };

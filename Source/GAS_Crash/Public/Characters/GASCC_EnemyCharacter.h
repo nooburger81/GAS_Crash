@@ -20,9 +20,19 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	virtual UAttributeSet* GetAttributeSet() const override;
 
+	UPROPERTY(editAnywhere, BlueprintReadOnly, Category = "Crash|AI")
+	float AcceptanceRadius{1000.f};
+
+	UPROPERTY(editAnywhere, BlueprintReadOnly, Category = "Crash|AI")
+	float MinAttackDelay{.1f};
+
+	UPROPERTY(editAnywhere, BlueprintReadOnly, Category = "Crash|AI")
+	float MaxAttackDelay{.5f};
+
 protected:
 	
 	virtual void BeginPlay() override;
+	virtual void HandleDeath() override;
 
 private:
 

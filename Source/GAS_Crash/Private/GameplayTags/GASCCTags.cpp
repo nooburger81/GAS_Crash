@@ -12,6 +12,8 @@ namespace GASCCTags
 
 	namespace Events
 	{
+		UE_DEFINE_GAMEPLAY_TAG_COMMENT(KillScored, "GASCCTags.Events.KillScored", "Tag for the Enemy KillScored Event");
+		
 		namespace Enemy
 		{
 			UE_DEFINE_GAMEPLAY_TAG_COMMENT(HitReact, "GASCCTags.Events.Enemy.HitReact", "Tag for Enemy Hit React Events");

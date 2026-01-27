@@ -2,8 +2,11 @@
 
 
 #include "Characters/GASCC_EnemyCharacter.h"
+
+#include "BrainComponent.h"
 #include "AbilitySystem/GASCC_AbilitySystemComponent.h"
 #include "AbilitySystem/GASCC_AttributeSet.h"
+#include "Runtime/AIModule/Classes/AIController.h"
 
 
 AGASCC_EnemyCharacter::AGASCC_EnemyCharacter()
@@ -46,5 +49,13 @@ void AGASCC_EnemyCharacter::BeginPlay()
 	if (!IsValid(GASCC_AttributeSet)) return;
 	
 	GetAbilitySystemComponent()->GetGameplayAttributeValueChangeDelegate(GASCC_AttributeSet->GetHealthAttribute()).AddUObject(this, &ThisClass::OnHealthChanged);
-}	
+}
 
+void AGASCC_EnemyCharacter::HandleDeath()
+{
+	Super::HandleDeath();
+
+	AAIController* AIController = GetController<AAIController>();
+	if (!IsValid(AIController)) return;
+	AIController->StopMovement();
+	}
