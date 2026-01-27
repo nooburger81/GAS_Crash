@@ -44,6 +44,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Crash|Attributes")
 	virtual void ResetAttributes();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void RotateToTarget(AActor* RotateTarget);
+
 protected:
 	void GiveStartupAbilities();
 	void InitializeAttributes() const;
