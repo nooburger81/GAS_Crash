@@ -8,6 +8,11 @@ namespace GASCCTags
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Primary, "GASCCTags.GASCCAbilities.Primary", "Tag for the Primary Ability");
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Secondary, "GASCCTags.GASCCAbilities.Secondary", "Tag for the Secondary Ability");
 		UE_DEFINE_GAMEPLAY_TAG_COMMENT(Tertiary, "GASCCTags.GASCCAbilities.Tertiary", "Tag for the Tertiary Ability");
+
+		namespace Enemy
+		{
+			UE_DEFINE_GAMEPLAY_TAG_COMMENT(Attack, "GASCCTags.GASCCAbilities.Enemy.Attack", "Tag for enemy attack abilities");
+		}
 	}
 
 	namespace Events

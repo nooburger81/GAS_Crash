@@ -40,8 +40,8 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	static FName GetHitDirectionName(const EHitDirection& HitDirection);
-
+	
 	UFUNCTION(BlueprintCallable)
-	static FClosestActorWithTagResult FindClosesActorWithTag(const UObject* WorldContextObject, const FVector& Origin, const FName& Tag);
+	static FClosestActorWithTagResult FindClosestActorWithTag(const UObject* WorldContextObject, const FVector& Origin, const FName& Tag);
 
 };
